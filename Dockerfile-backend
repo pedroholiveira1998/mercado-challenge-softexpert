@@ -1,0 +1,24 @@
+# Use a base image with PHP
+FROM php:8.3-apache
+
+# Install the libpq-dev package required to compile the pdo_pgsql extension
+RUN apt-get update && apt-get install -y libpq-dev
+
+# Enable the Apache rewrite module
+RUN a2enmod rewrite
+
+# Set the correct permissions for files in the working directory
+RUN chown -R www-data:www-data /var/www/html \
+    && chmod -R 755 /var/www/html
+
+# Copy the .env file to the /var/www/html directory
+COPY .env /app/.env
+
+# Install necessary PHP extensions (e.g., PDO PostgreSQL)
+RUN docker-php-ext-install pdo pdo_pgsql
+
+# Expose port 80 to access Apache in the container
+EXPOSE 80
+
+# Apache startup command when the container is launched
+CMD ["apache2-foreground"]
