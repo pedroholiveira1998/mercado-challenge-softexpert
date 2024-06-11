@@ -63,7 +63,7 @@ class ProductType
     {
         try {
             $db = Database::getInstance()->getConnection();
-            $stmt = $db->query("SELECT * FROM product_type");
+            $stmt = $db->query("SELECT * FROM product_type ORDER BY id");
             return $stmt->fetchAll(PDO::FETCH_ASSOC);
         } catch (\PDOException $e) {
             throw new \RuntimeException('Error fetching product types: ' . $e->getMessage());
