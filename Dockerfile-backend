@@ -4,6 +4,9 @@ FROM php:8.3-apache
 # Install the libpq-dev package required to compile the pdo_pgsql extension
 RUN apt-get update && apt-get install -y libpq-dev
 
+# Install git and zip/unzip
+RUN apt-get update && apt-get install -y git zip unzip
+
 # Enable the Apache rewrite module
 RUN a2enmod rewrite
 
@@ -16,6 +19,9 @@ COPY .env /app/.env
 
 # Install necessary PHP extensions (e.g., PDO PostgreSQL)
 RUN docker-php-ext-install pdo pdo_pgsql
+
+# Install Composer
+RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
 # Expose port 80 to access Apache in the container
 EXPOSE 80

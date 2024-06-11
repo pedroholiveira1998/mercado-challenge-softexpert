@@ -1,5 +1,7 @@
 # Variables
 COMPOSE = docker compose
+BACKEND_SERVICE = backend
+BACKEND_DIR = /var/www/html
 
 # Commands
 up:
@@ -25,6 +27,9 @@ backend-shell:
 
 migrate:
 	$(COMPOSE) exec backend php /var/www/html/migrate/migrate.php
+
+composer:
+	$(COMPOSE) exec $(BACKEND_SERVICE) composer install --working-dir=$(BACKEND_DIR)
 
 database-shell:
 	$(COMPOSE) exec database /bin/bash
