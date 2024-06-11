@@ -1,11 +1,11 @@
 # Variables
-COMPOSE = docker compose
+COMPOSE = docker compose # Replace if you are using a version earlier than Docker Compose 1.29.0
 BACKEND_SERVICE = backend
 BACKEND_DIR = /var/www/html
 
 # Commands
 up:
-	$(COMPOSE) up
+	$(COMPOSE) up -d
 
 down:
 	$(COMPOSE) down
@@ -33,3 +33,5 @@ composer:
 
 database-shell:
 	$(COMPOSE) exec database /bin/bash
+
+setup: composer migrate
