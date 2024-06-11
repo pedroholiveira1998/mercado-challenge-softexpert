@@ -79,6 +79,7 @@ class Sale
                 LEFT JOIN sale_item i ON s.id = i.sale_id
                 LEFT JOIN product p ON i.product_id = p.id
                 LEFT JOIN product_type pt ON p.type_id = pt.id
+                ORDER BY s.id
             ");
             $sales = [];
             $grandTotal = 0;
