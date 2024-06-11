@@ -25,7 +25,6 @@ const ProductModal = ({ open, onClose, onSubmit, product = null }) => {
 
   const handleChangeNumber = (e) => {
     const { name, value } = e.target
-    // Regex to match an empty string or a number that may contain a decimal point but not start with one
     if (value === '' || /^\d+(\.\d*)?$/.test(value)) {
       setFormData({ ...formData, [name]: value })
     }
