@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import api from '@lib/api'
 import { toast } from 'react-toastify'
-import SalesTable from './Table/SalesTable'
+import SalesCard from './Card/SalesCard'
 
 const SalesHistoryPage = () => {
   const [isLoading, setIsLoading] = useState(null)
@@ -24,7 +24,7 @@ const SalesHistoryPage = () => {
     fetchSales()
   }, [])
 
-  return <SalesTable sales={sales} />
+  return <SalesCard sales={sales} />
 }
 
 export default SalesHistoryPage
