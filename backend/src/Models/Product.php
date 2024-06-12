@@ -98,10 +98,15 @@ class Product
     {
         try {
             $db = Database::getInstance()->getConnection();
-            $stmt = $db->query("SELECT * FROM product");
+            $stmt = $db->query("
+                SELECT product.*, product_type.name AS type_name, product_type.tax_rate
+                FROM product
+                INNER JOIN product_type ON product.type_id = product_type.id
+                ORDER BY id
+            ");
             return $stmt->fetchAll(PDO::FETCH_ASSOC);
         } catch (\PDOException $e) {
-            throw new \RuntimeException('Error fetching products: ' . $e->getMessage());
+            throw new \RuntimeException('Error fetching products with product types: ' . $e->getMessage());
         } finally {
             $stmt = null;
         }
