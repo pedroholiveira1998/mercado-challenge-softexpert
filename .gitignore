@@ -1,0 +1,14 @@
+# System configuration files
+/.vscode
+/.idea
+/.DS_Store
+
+# Build files and dependencies
+/backend/vendor
+
+# Enviroment file
+.env
+
+# Cache files and logs
+/log/
+/temp/

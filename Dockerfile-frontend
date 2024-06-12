@@ -1,0 +1,25 @@
+# Dockerfile-frontend
+
+# Use a base image of Node.js
+FROM node:18
+
+# Set the working directory inside the container
+WORKDIR /app
+
+# Clean package cache
+RUN yarn cache clean
+
+# Copy package.json and yarn.lock files to the container (using Docker layer cache)
+COPY package.json yarn.lock ./
+
+# Install dependencies
+RUN yarn install
+
+# Copy the remaining project files to the container
+COPY . .
+
+# Expose Vite's default port
+EXPOSE 5173
+
+# Command to start Vite's development server
+CMD ["yarn", "dev", "--host"]
