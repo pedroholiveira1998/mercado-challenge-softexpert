@@ -16,6 +16,7 @@ const Header = ({ cartItems, onSubmit }) => {
   const [totalQuantity, setTotalQuantity] = useState(0)
   const [totalTaxes, setTotalTaxes] = useState(0)
   const [totalPurchaseValue, setTotalPurchaseValue] = useState(0)
+  const [totalPurchase, setTotalPurchase] = useState(0)
   const [itemDetails, setItemDetails] = useState([])
 
   useEffect(() => {
@@ -26,8 +27,8 @@ const Header = ({ cartItems, onSubmit }) => {
 
         return {
           ...item,
-          itemTotalValue: itemTotalValue,
-          itemTax: itemTax,
+          itemTotalValue,
+          itemTax,
         }
       })
 
@@ -48,6 +49,7 @@ const Header = ({ cartItems, onSubmit }) => {
       setTotalQuantity(sumQuantities)
       setTotalPurchaseValue(sumTotalPurchaseValue)
       setTotalTaxes(sumTotalTaxes)
+      setTotalPurchase(sumTotalPurchaseValue + sumTotalTaxes)
     }
   }, [cartItems])
 
@@ -82,10 +84,13 @@ const Header = ({ cartItems, onSubmit }) => {
                 ))}
               </List>
               <Typography variant="body1">
-                Total da Compra: R$ {totalPurchaseValue.toFixed(2)}
+                Total dos Produtos: R$ {totalPurchaseValue.toFixed(2)}
               </Typography>
               <Typography variant="body1">
                 Total de Impostos: R$ {totalTaxes.toFixed(2)}
+              </Typography>
+              <Typography variant="body1" fontWeight="bold">
+                Total da Compra: R$ {totalPurchase.toFixed(2)}
               </Typography>
             </div>
           </Box>
@@ -105,8 +110,8 @@ const Header = ({ cartItems, onSubmit }) => {
             </div>
           </Box>
         </Grid>
-        <Grid item xs={12} md={2} justifyContent="end">
-          <Box display="flex" justifyContent="end">
+        <Grid item xs={12} md={2}>
+          <Box display="flex" justifyContent="flex-end">
             <Button
               color="success"
               variant="contained"
